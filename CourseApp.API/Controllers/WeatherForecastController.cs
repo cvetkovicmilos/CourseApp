@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CourseApp.API.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace CourseApp.API.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")] // ovo je deo putanje, npr https://localhost:5000/values
     public class WeatherForecastController : ControllerBase
@@ -47,6 +49,7 @@ namespace CourseApp.API.Controllers
             return Ok(values);
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetValue(int id) 
         {
